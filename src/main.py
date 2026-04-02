@@ -1,23 +1,27 @@
-def add_receita():
+def mostrar_menu():
+      print('\n1 - Adicionar Receita\n2 - Adicionar Despesas\n3 - Ver Resumo Financeiro\n4 - Sair')
+
+def ler_opcao():
+      while True:
+                  try:
+                        opcao = int(input('Escolha uma das opções: '))
+                        if opcao in (1,2,3,4):
+                              break
+                        else:
+                              print('Número Inválido!')
+                              
+                  except ValueError:
+                        print('Digite apenas números!')
+      
+      return opcao
+                  
+
+def main():
+      
+      mostrar_menu()
+      
+      opcao = ler_opcao()
+      
 
 
-print('='*40)
-print(f'{'BEM-VINDO AO SEU CONTROLE FINANCEIRO!':^40}')
-print('='*40)
-
-receitas = []
-despesas = []
-
-while True:
-    print('1 - Adicionar receita\n'
-          '2 - Adicionar despesa\n'
-          '3 - Listar transações\n'
-          '4 - Mostrar saldo atual')
-
-    opcao = int(input('Escolha uma opção: '))
-
-    if opcao == 1:
-
-
-    break
-
+main()     
