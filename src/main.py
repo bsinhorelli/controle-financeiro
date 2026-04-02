@@ -17,10 +17,19 @@ def ler_opcao():
                   
 
 def main():
-      
-      mostrar_menu()
-      
-      opcao = ler_opcao()
+      while True:
+            mostrar_menu()
+            opcao = ler_opcao()
+            
+            if opcao == 1:
+                  print('Adicionar Receita')
+            elif opcao == 2:
+                  print('Adicionar Despesa')
+            elif opcao == 3:
+                  print('Ver Resumo Financeiro')
+            else:
+                  print('encerrando programa...')
+                  break
       
 
 
