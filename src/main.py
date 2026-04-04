@@ -1,5 +1,5 @@
 def mostrar_menu():
-      print('\n1 - Adicionar Receita\n2 - Adicionar Despesas\n3 - Ver Resumo Financeiro\n4 - Sair')
+      print('\n1 - Adicionar Receitas\n2 - Adicionar Despesas\n3 - Ver Resumo Financeiro\n4 - Sair')
 
 def ler_opcao():
       while True:
@@ -19,29 +19,38 @@ def adicionar_receita():
       receitas = dict()
       receitas['tipo'] = 'Receita'
       
-      descricao = input('Descrição da Receita: ')
-      receitas['Descrição'] = descricao
+      receitas['descrição'] = input('Descrição da Receita: ')
       
       while True:
             try:
-                  valor = float(input('Digite o valor da receita: R$ '))
-                  if valor > 0:
+                  receitas['valor (R$)'] = float(input('Digite o valor da receita: R$ '))
+                  if receitas['valor (R$)'] > 0:
                         break
                   else:
                         print('Digite um valor positivo!')
             except ValueError:
                   print('Digite um valor Real, Apenas Números!')
-      receitas['Valor (R$)'] = valor
       
       return receitas
+
+def adicionar_despesa():
+      despesas = dict()
+      despesas['tipo'] = 'Despesa'
       
+      despesas['descrição'] = input('Descrição da Despesa: ')
       
-      
-      
-      
-      
-      
+      while True:
+            try:
+                  despesas['valor (R$)'] = float(input('Digite o valor da despesa: R$ '))
+                  if despesas['valor (R$)'] > 0:
+                        break
+                  else:
+                        print('Digite um valor positivo!')
+            except ValueError:
+                  print('Digite um valor Real, Apenas Números!')
                   
+      return despesas
+                       
 
 def main():
       transacoes = []
@@ -55,9 +64,11 @@ def main():
                   transacoes.append(receitas)
                   print(receitas)
                   
-                  
             elif opcao == 2:
-                  print('Adicionar Despesa')
+                  despesas = adicionar_despesa()
+                  transacoes.append(despesas)
+                  print(despesas)
+                  
             elif opcao == 3:
                   print('Ver Resumo Financeiro')
                   print(transacoes)
