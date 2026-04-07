@@ -2,6 +2,8 @@ def mostrar_menu():
       print('\n1 - Adicionar Receitas\n2 - Adicionar Despesas\n3 - Ver Resumo Financeiro\n4 - Sair')
 
 def ler_opcao():
+      '''lê a opção escolhida do usuário e valida o valor escolhido.'''
+      
       while True:
                   try:
                         opcao = int(input('Escolha uma das opções: '))
@@ -16,6 +18,7 @@ def ler_opcao():
       return opcao
 
 def adicionar_receita():
+      '''coleta os dados de uma receita, valida o valor e retorna um dicionário com as informações da transação.'''
       receitas = dict()
       receitas['tipo'] = 'Receita'
       
@@ -34,6 +37,7 @@ def adicionar_receita():
       return receitas
 
 def adicionar_despesa():
+      '''coleta os dados de uma despesa, valida o valor e retorna um dicionário com as informações da transação.'''
       despesas = dict()
       despesas['tipo'] = 'Despesa'
       
@@ -71,7 +75,7 @@ def main():
                   
             elif opcao == 3:
                   print('Ver Resumo Financeiro')
-                  print(transacoes)
+                  
             else:
                   print('encerrando programa...')
                   break
