@@ -1,5 +1,13 @@
+import os
+os.system('cls')
+
 def mostrar_menu():
-      print('\n1 - Adicionar Receitas\n2 - Adicionar Despesas\n3 - Ver Resumo Financeiro\n4 - Sair')
+      '''Exibe as opções disponíveis no menu principal.'''
+      
+      print('''1 - Adicionar Receitas
+2 - Adicionar Despesas
+3 - Ver Resumo Financeiro
+4 - Sair''')
 
 def ler_opcao():
       '''lê a opção escolhida do usuário e valida o valor escolhido.'''
@@ -54,6 +62,71 @@ def adicionar_despesa():
                   print('Digite um valor Real, Apenas Números!')
                   
       return despesas
+
+def resumo_financeiro(transacoes):
+      '''exibe as receitas, as despesas, os totais, o saldo final e algumas estatísticas das transações.'''
+      
+      if not transacoes:
+            print('\nNenhuma transação registrada ainda.')
+            return
+      
+      
+      receitas = [t for t in transacoes if t['tipo'] == 'Receita']
+      despesas = [t for t in transacoes if t['tipo'] == 'Despesa']
+      
+      
+      total_receitas = sum(r['valor (R$)'] for r in receitas)
+      total_despesas = sum(d['valor (R$)'] for d in despesas)
+      saldo = total_receitas - total_despesas
+      
+      print('\n' + '=' * 40)
+      print('RESUMO FINANCEIRO'.center(40))
+      print('=' * 40)
+      
+      
+      print('\nRECEITAS:')
+      if receitas:
+            for r in receitas:
+                  print(f'  {r["descrição"][:24]:<24} R$ {r["valor (R$)"]:>10.2f}')
+      else:
+            print('  Nenhuma receita registrada.')
+      
+      
+      print('\nDESPESAS:')
+      if despesas:
+            for d in despesas:
+                  print(f'  {d["descrição"][:24]:<24} R$ {d["valor (R$)"]:>10.2f}')
+      else:
+            print('  Nenhuma despesa registrada.')
+      
+      
+      print('\n' + '-' * 40)
+      print(f'{"Total de receitas:":<26} R$ {total_receitas:>10.2f}')
+      print(f'{"Total de despesas:":<26} R$ {total_despesas:>10.2f}')
+      print(f'{"Saldo final:":<26} R$ {saldo:>10.2f}')
+      print('-' * 40)
+      
+      if saldo > 0:
+            print('Você está no azul!')
+      elif saldo < 0:
+            print('Atenção: você está no vermelho!')
+      else:
+            print('Seu saldo está zerado.')
+      
+      
+      if total_receitas > 0:
+            percentual = total_despesas / total_receitas * 100
+            print(f'Você gastou {percentual:.1f}% do que recebeu.')
+      
+      
+      if despesas:
+            maior = despesas[0]
+            for d in despesas:
+                  if d['valor (R$)'] > maior['valor (R$)']:
+                         maior = d
+      
+      print('=' * 40)         
+      
                        
 
 def main():
@@ -66,15 +139,15 @@ def main():
             if opcao == 1:
                   receitas = adicionar_receita()
                   transacoes.append(receitas)
-                  print(receitas)
+                  
                   
             elif opcao == 2:
                   despesas = adicionar_despesa()
                   transacoes.append(despesas)
-                  print(despesas)
+                  
                   
             elif opcao == 3:
-                  print('Ver Resumo Financeiro')
+                  resumo_financeiro(transacoes)
                   
             else:
                   print('encerrando programa...')
